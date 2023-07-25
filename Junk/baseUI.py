@@ -1,6 +1,6 @@
 # Harrison
-# 10.7.23 - __.__.__
 # the 'base' or home UI for the cable management system.
+# 10.7.23 - __.__.__
 
 import customtkinter
 
@@ -81,7 +81,7 @@ class App(customtkinter.CTk):
         self.grid_columnconfigure((0, 1), weight=1)
         self.grid_rowconfigure(0, weight=1)
         
-        values = ['item 1', 'item 2', 'item 3', 'item 4', 'item 5', 'item 6', 'item 7', 'item 8']
+        values = ['item 1', 'item 2', 'item 3', 'item 4', 'item 5', 'item 6', 'item 7', 'item 8', 'boom', 'pow']
         self.scrollCheckboxFrame = ScrollableCheckboxFrame(self, title='values', values=values)
         self.scrollCheckboxFrame.grid(row=0, column=0, padx=(10, 0), pady=(10, 0), sticky="nsew")
 
