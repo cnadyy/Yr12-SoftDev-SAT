@@ -5,7 +5,15 @@
 import customtkinter
 import fileDatabase
 
-db = fileDatabase()
+db = fileDatabase.SQLDatabase()
+
+
+class ScrollingCables(customtkinter.CTkScrollableFrame):
+    def __init__(self, master, title):
+        super().__init__(master, label_text=title)
+        self.grid_columnconfigure(0, weight=1)
+
+
 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -13,7 +21,10 @@ class App(customtkinter.CTk):
         self.title('Duffinator_CableManager7014')
         self.geometry('960x540')
 
-        db.removeCables()
+        self.scrollingCables = ScrollingCables(self, title='test')
+        self.scrollingCables.grid(row=1, column=0, padx=(10, 0), pady=(10, 0), sticky="nsew")
+
+        db.sortCable()
 
 
 # class 
