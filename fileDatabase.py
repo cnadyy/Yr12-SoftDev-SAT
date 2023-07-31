@@ -3,7 +3,6 @@
 # 25.7.23
 
 import sqlite3
-import customtkinter
 
 class SQLDatabase():
     def __init__(self):
@@ -13,7 +12,6 @@ class SQLDatabase():
         # Creates a new table inside of database if not already existing, includes all collumns and appropriate text type for each
         cur.execute("""
         CREATE TABLE IF NOT EXISTS cableDb (
-            ID INTEGER,
             name TEXT,
             length REAL,
             description TEXT,
@@ -22,7 +20,7 @@ class SQLDatabase():
         ) """)
     
     # adds new information to the database, information is gained through input by user and added into file system, includes validation of data types
-    def addCable(self):
+    def addCable(self, data):
         cur = self.con.cursor()
         
         stuff = ['name', 'test again ??????', 'testing 3']
@@ -30,13 +28,14 @@ class SQLDatabase():
         special = "f"
         
         # creates a dictionary defining values for each collumn, information from user input and redefined to fit data structure
-        data = {'name': "x", 'special': "y", 'length': 1.2}
+        # data = {'name': "x", 'description': "y", 'length': 1.2, 'quantity': 4, 'location': "there"}
         
-        # f list of information defined from dictionary
-        x = f'{data.name}, {data.special}'
+        # f string of information defined from dictionary
+        x = f'"{data["name"]}", {data["length"]}, "{data["description"]}", {data["quantity"]}, "{data["location"]}"'
         
         # adds information to database system {} represents items in a dictionary / list previously defined above
-        cur.execute("INSERT INTO cableDb VALUES ('{name}', {length}, '{special}', 2, 'this is a location', 204)".format(*x))
+        print(f"INSERT INTO cableDb VALUES ({x})")
+        cur.execute(f"INSERT INTO cableDb VALUES ({x})")
         
         self.con.commit()
     
@@ -60,15 +59,16 @@ class SQLDatabase():
         cur = self.con.cursor()
         print('test')
 
-#test = 'testing !!!'
+# test = 'testing !!!'
 
-db = SQLDatabase()
-add = input('do you want to add a cable?')
+# name2 = input('add name')
+# db = SQLDatabase()
+# add = input('do you want to add a cable?')
 
-if add == 'y':
-   db.addCable()
-   db.getCables()
-elif add =='no i want to remove pretty please':
-   db.removeCable()
-else:
-   print('ok :(')
+# if add == 'y':
+#    db.addCable({'name': f"{name2}", 'description': "yeaaa", 'length': 1.2, 'quantity': 4, 'location': "there"})
+#    db.getCables()
+# elif add =='no i want to remove pretty please':
+#    db.removeCable()
+# else:
+#    print('ok :(')

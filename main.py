@@ -5,7 +5,11 @@
 import customtkinter
 import fileDatabase
 
+usrName = 'name      test JACK EDITION'
+usrDesc = 'can you quickly press comand z'
+
 db = fileDatabase.SQLDatabase()
+db.addCable({'name': f"{usrName}", 'description': f"{usrDesc}", 'length': 1.2, 'quantity': 4, 'location': "there"})
 
 
 class ScrollingCables(customtkinter.CTkScrollableFrame):
