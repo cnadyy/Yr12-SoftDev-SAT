@@ -5,11 +5,14 @@
 import customtkinter
 import fileDatabase
 
-usrName = 'name      test JACK EDITION'
-usrDesc = 'can you quickly press comand z'
+usrName = input('what is a name ?? ')
+usrDesc = input('descption ?!?! ' )
+usrLength = input('pick a length plss ')
+usrQuant = input('how many !?! ')
+usrLocate = input('where is it ?! ')
 
 db = fileDatabase.SQLDatabase()
-db.addCable({'name': f"{usrName}", 'description': f"{usrDesc}", 'length': 1.2, 'quantity': 4, 'location': "there"})
+db.addCable({'name': f"{usrName}", 'description': f"{usrDesc}", 'length': f"{float(usrLength)}", 'quantity': f"{int(usrQuant)}", 'location': f"{usrLocate}"})
 
 
 class ScrollingCables(customtkinter.CTkScrollableFrame):
