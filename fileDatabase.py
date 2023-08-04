@@ -30,7 +30,7 @@ class SQLDatabase():
         # creates a dictionary defining values for each collumn, information from user input and redefined to fit data structure
         # data = {'name': "x", 'description': "y", 'length': 1.2, 'quantity': 4, 'location': "there"}
         
-        # f string of information defined from dictionary
+        # f string of information defined through user input through UI
         x = f'"{data["name"]}", {data["length"]}, "{data["description"]}", {data["quantity"]}, "{data["location"]}"'
         
         # adds information to database system {} represents items in a dictionary / list previously defined above
@@ -49,26 +49,14 @@ class SQLDatabase():
         res = cur.execute("SELECT * FROM cableDb")
         allCables = res.fetchall()
 
-        print(allCables)
-
-        #print(test)
-        #print(self.testing.fetchall())
+        return[allCables]
 
     # function for sorting cables based off specifications given by User
     def sortCable(self):
         cur = self.con.cursor()
         print('test')
 
-# test = 'testing !!!'
+db = SQLDatabase()
+db.getCables()
 
-# name2 = input('add name')
-# db = SQLDatabase()
-# add = input('do you want to add a cable?')
-
-# if add == 'y':
-#    db.addCable({'name': f"{name2}", 'description': "yeaaa", 'length': 1.2, 'quantity': 4, 'location': "there"})
-#    db.getCables()
-# elif add =='no i want to remove pretty please':
-#    db.removeCable()
-# else:
-#    print('ok :(')
+print(db.getCables())
