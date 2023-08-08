@@ -2,7 +2,6 @@
 # Main UI for Cable Management system
 # 25.7.23 - __.__.23
 
-from tkinter import Label
 import customtkinter
 import fileDatabase
 
@@ -13,7 +12,7 @@ import fileDatabase
 # usrLocate = input('where is it ?! ')
 
 db = fileDatabase.SQLDatabase()
-# db.addCable({'name': f"{usrName}", 'description': f"{usrDesc}", 'length': f"{float(usrLength)}", 'quantity': f"{int(usrQuant)}", 'location': f"{usrLocate}"})
+# db.addCable({'name': f"{usrName}", 'description': f"{usrDesc}", 'length': float(usrLength), 'quantity': int(usrQuant), 'location': f"{usrLocate}"})
 
 
 class ScrollingCables(customtkinter.CTkScrollableFrame):
@@ -24,19 +23,23 @@ class ScrollingCables(customtkinter.CTkScrollableFrame):
         cables = db.getCables()
         
         print(cables)
-        # i = 0
-        # for cable in cables:
-        #     print(cable[i])
-        #     i += 1
-            
-            # cableObj = customtkinter.CTkLabel(self, text=cable)
-            # cableObj.grid(row=i, column=0, columnspan=100, sticky='ew')
-            # print(cable[0])
-            # i += 1
-
-
-
         
+        for i, cable in enumerate(cables):
+            print(cable)
+            cableName = customtkinter.CTkLabel(self, text=cable[0])
+            cableName.grid(row=i, column=0, sticky='w')
+
+            cableLength = customtkinter.CTkLabel(self, text=cable[1])
+            cableLength.grid(row=i, column=1, sticky='w')
+
+            cableDesc = customtkinter.CTkLabel(self, text=cable[2])
+            cableDesc.grid(row=i, column=2, sticky='w') 
+
+            cableQuant = customtkinter.CTkLabel(self, text=cable[3])
+            cableQuant.grid(row=i, column=3, sticky='w')
+
+            cableLoc = customtkinter.CTkLabel(self, text=cable[4])
+            cableLoc.grid(row=i, column=4, sticky='w')
 
         #print(db.getCables())
         #print('where is this maent to be')
@@ -47,11 +50,11 @@ class HeaderFrame(customtkinter.CTkFrame):
         self.grid_columnconfigure(0, weight=1)
 
         self.lblTitle = customtkinter.CTkLabel(self, text='Duffinator_CableManager7014')
-        self.lblTitle.grid(row=0, column=0, padx=(10, 0))
+        self.lblTitle.grid(row=0, column=0, padx=(10, 0), sticky='w')
 
-        def btnCallBack():
-            print('test')
-
+        def btnCallBack(cableVerify):
+            AddCableFrame()    
+            
         self.btnAddCable = customtkinter.CTkButton(self, text='Add Cable', command=btnCallBack)
         self.btnAddCable.grid(row=1, column=0, padx=(10, 0))
 
@@ -63,6 +66,13 @@ class HeaderFrame(customtkinter.CTkFrame):
 
         self.optionSort = customtkinter.CTkOptionMenu(self, values=['option', 'date ^', 'date v', 'length ^', 'length v'])
         self.optionSort.grid(row=0, column=3, padx=(10,0))
+
+class AddCableFrame(customtkinter.CTk):
+    def __init__(self, cableVerify):
+        super().__init__()
+        self.title('Add Cable')
+        self.geometry('300x540')
+
 
 class App(customtkinter.CTk):
     def __init__(self):

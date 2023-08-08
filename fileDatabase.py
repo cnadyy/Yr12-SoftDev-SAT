@@ -49,7 +49,7 @@ class SQLDatabase():
         res = cur.execute("SELECT * FROM cableDb")
         allCables = res.fetchall()
 
-        return[allCables]
+        return allCables
 
     # function for sorting cables based off specifications given by User
     def sortCable(self):
