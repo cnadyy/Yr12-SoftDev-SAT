@@ -109,7 +109,7 @@ class AddCableFrame(customtkinter.CTk):
         self.addBtn = customtkinter.CTkButton(self, text='Add Cable', command=self.cableAdd)
         self.addBtn.grid(row=6, column=0, columnspan=100, padx=(5,5))
     
-def cableAdd(self):
+def cableAdd(self, cableUpdate):
         usrName = self.inputName.get()
         usrDesc = self.inputDesc.get()
         usrLength = self.inputLength.get()
@@ -118,8 +118,8 @@ def cableAdd(self):
         
         db.addCable({'name': f"{usrName}", 'description': f"{usrDesc}", 'length': float(usrLength), 'quantity': int(usrQuant), 'location': f"{usrLocate}"})
         
-        test = ScrollingCables()
-        test.cableUpdate()
+        test = ScrollingCables(cableUpdate)
+        test()
 
 class App(customtkinter.CTk):
     def __init__(self):
