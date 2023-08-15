@@ -23,9 +23,6 @@ class SQLDatabase():
     def addCable(self, data):
         cur = self.con.cursor()
         
-        # creates a dictionary defining values for each collumn, information from user input and redefined to fit data structure
-        # data = {'name': "x", 'description': "y", 'length': 1.2, 'quantity': 4, 'location': "there"}
-        
         # f string of information defined through user input through UI
         x = f'"{data["name"]}", {data["length"]}, "{data["description"]}", {data["quantity"]}, "{data["location"]}"'
         

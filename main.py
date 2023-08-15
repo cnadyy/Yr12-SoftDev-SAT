@@ -38,13 +38,9 @@ class ScrollingCables(customtkinter.CTkScrollableFrame):
         
     def updateUI(self):
         rows = self.winfo_children()
-
-        frameAdd = AddCableFrame()
         
-        frameAdd.destroy()
         # iterates through existing rows generated and destroys each label, then calls cableUpdate() and recreates display. .destroy() as of current does not work, resulting in no update to UI upon adding a cable
         for row in rows:
-            # self.row.destroy()
             self.cableName.destroy()
             self.cableLength.destroy()
             self.cableDesc.destroy()
@@ -60,17 +56,17 @@ class HeaderFrame(customtkinter.CTkFrame):
         self.grid_columnconfigure(1, weight=1)
         self.grid_columnconfigure(2, weight=1)
 
-        # self.lblTitle = customtkinter.CTkLabel(self, text='Duffinator_CableManager7014')
-        # self.lblTitle.grid(row=0, column=0, padx=(10, 0), sticky='w')
-
-        # opens AddCable Frame to allow user to add information
+        # upon press of 'Add Cable', it opens new AddCable Frame to allow user to add information
         def addCallBack():
             AddCableFrame()    
+        # upon press of 'Edit Cable', it updates button to red to demonstrate lack of functionality
         def editCallBack():
             self.btnEditCable.configure(text='Unavailable', fg_color='red')
+        # upon press of 'Delete Cable', it updates button to red to demonstrate lack of functionality
         def deleteCallBack():
             self.btnDeleteCable.configure(text='Unavailable', fg_color='red')
 
+        # all widgets featured inside of HeaderFrame
         self.lblTitle = customtkinter.CTkLabel(self, text='Really Cool Logo')
         self.lblTitle.grid(row=0, column=0, padx=(10, 0), sticky='w')
             
@@ -100,6 +96,7 @@ class AddCableFrame(customtkinter.CTk):
         self.geometry('300x300')
         self.grid_columnconfigure(0, weight=1)
 
+        # all widgets featured inside of AddaCableFrame
         self.lblTitle = customtkinter.CTkLabel(self, text='Add Cable?')
         self.lblTitle.grid(row=0, column=0, columnspan=100, padx=(10,10), pady=(10,10), sticky='we')
 
@@ -138,13 +135,14 @@ class AddCableFrame(customtkinter.CTk):
     
     # adds all information entered above, converts to appropriate data type & adds to the file system
     def cableAdd(self):
+            # gets andc converts CTkStringVar into Python variables
             usrName = self.inputName.get()
             usrDesc = self.inputDesc.get()
             usrLength = self.inputLength.get()
             usrQuant = self.inputQuant.get()
             usrLocate = self.inputLocate.get()
 
-            #### TYPE VALIDATION & UPDATE ?
+        # Type Validation. uses try, except operation to validate data types entered through the UI, attempts to add all information to file system & button update to show sucess if working, if not, button is update to show such.
             try:
                 db.addCable({'name': f"{usrName}", 'description': f"{usrDesc}", 'length': float(usrLength), 'quantity': int(usrQuant), 'location': f"{usrLocate}"})
                 self.addBtn.configure(fg_color='green', text='Cable Added | Please Refresh Program')
@@ -158,15 +156,14 @@ class App(customtkinter.CTk):
         self.title('Duffinator_CableManager7014')
         self.geometry('960x540')
         self.grid_columnconfigure(0, weight=1)
-        # self.grid_rowconfigure(0, weight=1)
 
+        # Frame for the Header of the App UI
         self.appHeader = HeaderFrame(self)
         self.appHeader.grid(row=0, column=0, padx=(10, 10), pady=(10, 0), sticky='nsew')
 
+         # Frame for the Display of Cables of the App UI
         self.scrollingCables = ScrollingCables(self, height=400, title='Name | Length | Description | Quantity | Location')
         self.scrollingCables.grid(row=1, column=0, padx=(10, 10), pady=(10, 0), sticky='nsew')
-
-        db.sortCable()
 
 app = App()
 app.mainloop()
