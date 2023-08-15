@@ -148,8 +148,6 @@ class AddCableFrame(customtkinter.CTk):
             try:
                 db.addCable({'name': f"{usrName}", 'description': f"{usrDesc}", 'length': float(usrLength), 'quantity': int(usrQuant), 'location': f"{usrLocate}"})
                 self.addBtn.configure(fg_color='green', text='Cable Added | Please Refresh Program')
-                self.lblRefresh = customtkinter.CTkLabel(self, text='please refresh program')
-                self.lblRefresh.grid(row=7, column=0, padx=(5,5), pady=(5,5), sticky='nsew')
             except:
                 self.addBtn.configure(fg_color='red', text='Length / Quant Entry Error')
 
