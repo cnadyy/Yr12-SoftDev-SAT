@@ -31,6 +31,9 @@ class SQLDatabase():
         cur.execute(f"INSERT INTO cableDb VALUES ({x})")
         
         self.con.commit()
+
+        # backend demonstration of Cable Addition to Database, featured as a way of evaluating efficient speed of processing
+        print('sucessfully added cable')
     
     # removes cable from SQLite database, uses information from RowID to identify and remove appropriate cable(s)
     def removeCable(self):

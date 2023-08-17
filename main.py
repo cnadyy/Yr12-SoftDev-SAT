@@ -38,7 +38,7 @@ class ScrollingCables(customtkinter.CTkScrollableFrame):
         
     def updateUI(self):
         rows = self.winfo_children()
-        
+
         # iterates through existing rows generated and destroys each label, then calls cableUpdate() and recreates display. .destroy() as of current does not work, resulting in no update to UI upon adding a cable
         for row in rows:
             self.cableName.destroy()
@@ -135,7 +135,7 @@ class AddCableFrame(customtkinter.CTk):
     
     # adds all information entered above, converts to appropriate data type & adds to the file system
     def cableAdd(self):
-            # gets andc converts CTkStringVar into Python variables
+            # gets and converts CTkStringVar's above into Python variables
             usrName = self.inputName.get()
             usrDesc = self.inputDesc.get()
             usrLength = self.inputLength.get()
